@@ -561,7 +561,7 @@ $(function(){
 		render: function() {
 		    this.$el.html(this.template());
 		    return this;
-		},
+		}
 	});
 
 	var StopsByIdView = Backbone.View.extend({
@@ -751,7 +751,7 @@ $(function(){
 		}
 
 	})
-
+	//######
 	var ContentView = Backbone.View.extend({
 		el: $(".app-container"),
 
@@ -875,8 +875,8 @@ $(function(){
 	    excludedPanelContent: 'style, script, #disclaimer'
 	});
 	jPM.on();
-
-	var DowntownNorfolk = new google.maps.LatLng(36.863794,-76.285608);
+	
+	var DowntownNorfolk = new google.maps.LatLng(36.863794,-76.285608);	
 	var App = {
 		ContentView: new ContentView,
 		Router: new Router,
