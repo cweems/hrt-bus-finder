@@ -143,16 +143,16 @@
 
 	</div>
 
-	<script src="./js/vendor/jquery-2.0.2.js"></script>
-	<script src="./js/vendor/jquery.jpanelmenu.js"></script>
+	<script src="./js/jquery-2.0.2.js"></script>
+	<script src="./js/jquery.jpanelmenu.js"></script>
 	<script src="//maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="./js/vendor/underscore-min.js"></script>
-	<script src="./js/vendor/backbone.js"></script>
-	<script src="./js/vendor/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./js/vendor/hammer.2.0.4.js"></script>
-	<script type="text/javascript" src="./js/vendor/wptr.1.1.js"></script>
+	<script src="./js/underscore-min.js"></script>
+	<script src="./js/backbone.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/hammer.2.0.4.js"></script>
+	<script type="text/javascript" src="./js/wptr.1.1.js"></script>
 	<script src="./js/busfinder.js"></script>
-	<script src="./js/vendor/modernizr.js"></script>
+	<script src="./js/modernizr.js"></script>
 
 	<script type="text/template" id="stop-template">
 		<div class="stop-name"><h4><%= stopName %></h4> <p>(Stop <%= stopId %>)</p></div>
@@ -275,27 +275,6 @@
                 localStorage['disclaimer_accepted'] = 'true';
             }
         });
-	</script>
-	<script>
-		            window.onload = function() {
-		                WebPullToRefresh.init( {
-		                    loadingFunction: exampleLoadingFunction
-		                } );
-		            };
-
-		            // Just an example loading function that returns a
-		            // promise that WebPullToRefresh can use.
-		            var exampleLoadingFunction = function() {
-		                return new Promise( function( resolve, reject ) {
-		                    // Run some async loading code here
-
-		                    if ( true /* if the loading worked */ ) {
-		                        resolve();
-		                    } else {
-		                        reject();
-		                    }
-		                } );
-		            };
 	</script>
 	</div>
 </body>

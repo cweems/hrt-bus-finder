@@ -2,15 +2,6 @@
 Pull to Refresh
 *********************/
 
-html, body {
-	height: 100%;
-}
-
-body {
-	background: #333;
-	margin: 0;
-}
-
 #ptr {
 	background: #555;
 	position: absolute;
@@ -21,6 +12,7 @@ body {
 	z-index: 0;
 	text-align: center;
 	height: 50px;
+	box-shadow: inset 0px -4px 4px #3B3B3B;
 }
 
 #ptr .genericon {
@@ -671,7 +663,6 @@ Loading Message
 	position: fixed;
 	top: 0;
 	height: 100%;
-	width: 100%;
 	background: url(../img/ps_neutral.png);
 
 }

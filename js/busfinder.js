@@ -143,10 +143,26 @@ $(function(){
 
 			this.updateArrivalList();
 			App.Intervals.push(setInterval($.proxy(this.updateArrivalList, this), 60000));
+
+			WebPullToRefresh.init({
+				loadingFunction: this.updateArrivalList
+			});
 		},
 
 		updateArrivalList: function() {
-			this.collection.fetch({dataType: 'jsonp'});
+			var deferred = $.Deferred();
+			console.log(this.collection);
+			this.collection.fetch({
+				dataType: 'jsonp',
+				success: function(){
+					console.log('update successful!');
+					deferred.resolve();
+				},
+				error: function(){
+					deferred.reject();
+				}
+			});
+			return deferred.promise();
 		},
 
 		render: function() {
@@ -706,9 +722,9 @@ $(function(){
 		},
 
 		findClosestStops: function(location) {
-		    App.Router.navigate('findStops/' + location.lat() + '/' + location.lng() + '/');
-		    this.collection.url = API_URL + 'stops/near/' + location.lat() + '/' + location.lng() + '/';
-		    this.collection.fetch({remove: false, dataType: 'jsonp'});
+			App.Router.navigate('findStops/' + location.lat() + '/' + location.lng() + '/');
+			this.collection.url = API_URL + 'stops/near/' + location.lat() + '/' + location.lng() + '/';
+			this.collection.fetch({remove: false, dataType: 'jsonp'});
 		},
 
 		locate: function() {
@@ -716,12 +732,12 @@ $(function(){
 		},
 
 		onUserLocated: function(location) {
-		    App.Router.navigate('findStops/' + location.lat() + '/' + location.lng() + '/');
-	        App.MapView.createUserMarker(location, true);
-	        App.MapView.resize();
-	        App.MapView.center(location);
-	        App.MapView.zoom(17);
-	        this.findClosestStops(location);
+			App.Router.navigate('findStops/' + location.lat() + '/' + location.lng() + '/');
+			App.MapView.createUserMarker(location, true);
+			App.MapView.resize();
+			App.MapView.center(location);
+			App.MapView.zoom(17);
+			this.findClosestStops(location);
 	    },
 
 		search: function() {

@@ -13,13 +13,13 @@ var WebPullToRefresh = (function () {
 		ptrEl: 'ptr', 
 
 		// Number of pixels of panning until refresh 
-		distanceToRefresh: 70, 
+		distanceToRefresh: 40, 
 
 		// Pointer to function that does the loading and returns a promise
 		loadingFunction: false,
 
 		// Dragging resistance level
-		resistance: 2.5
+		resistance: 1.5
 	};
 
 	/**
@@ -177,7 +177,10 @@ var WebPullToRefresh = (function () {
 
 		// If no valid loading function exists, just reset elements
 		if ( ! options.loadingFunction ) {
+			console.log('loading function not set');
 			return _doReset();
+		} else {
+			console.log(options.loadingFunction);
 		}
 
 		// The loading function should return a promise
@@ -187,7 +190,7 @@ var WebPullToRefresh = (function () {
 		setTimeout( function() {
 			// Once actual loading is complete, reset pull to refresh
 			loadingPromise.then( _doReset );
-		}, 100000 );
+		}, 1000 );
 	};
 
 	/**
