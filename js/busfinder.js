@@ -134,6 +134,7 @@ $(function(){
 		template: _.template($('#stop-template').html()),
 
 		initialize: function() {
+			var that = this;
 			this.collection = new ArrivalList;
 			this.collection.stopId = this.model.get('stopId');
 			this.collection.on('add', this.addArrival, this);
@@ -141,29 +142,27 @@ $(function(){
 			this.collection.on('sync', this.checkForEmpty, this);
 			this.listenTo(App.ContentView, 'forceRefresh', this.updateArrivalList);
 
-			this.updateArrivalList();
+			this.updateArrivalList(that);
 			App.Intervals.push(setInterval($.proxy(this.updateArrivalList, this), 60000));
-
 			WebPullToRefresh.init({
 				loadingFunction: this.updateArrivalList
 			});
 		},
 
-		updateArrivalList: function() {
-			var deferred = $.Deferred();
-			console.log(this.collection);
+		updateArrivalList: function(context) {
 			this.collection.fetch({
 				dataType: 'jsonp',
 				success: function(){
-					console.log('update successful!');
-					deferred.resolve();
+					if($('.ptr-loading')) {
+						WebPullToRefresh.doReset();
+					}
 				},
 				error: function(){
-					deferred.reject();
+					console.log("loading failed!");
 				}
 			});
-			return deferred.promise();
 		},
+
 
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
@@ -202,6 +201,7 @@ $(function(){
 			var arrivalView = new ArrivalView({model: arrival, stop: this.model});
 			this.$('.arrivals .table').append(arrivalView.render().$el);
 		}
+
 	});
 
 	var MapView = Backbone.View.extend({
@@ -767,7 +767,7 @@ $(function(){
 		}
 
 	})
-	//######
+
 	var ContentView = Backbone.View.extend({
 		el: $(".app-container"),
 

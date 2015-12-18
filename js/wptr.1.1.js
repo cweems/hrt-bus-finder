@@ -174,23 +174,7 @@ var WebPullToRefresh = (function () {
 	 */
 	var _doLoading = function() {
 		bodyClass.add( 'ptr-loading' );
-
-		// If no valid loading function exists, just reset elements
-		if ( ! options.loadingFunction ) {
-			console.log('loading function not set');
-			return _doReset();
-		} else {
-			console.log(options.loadingFunction);
-		}
-
-		// The loading function should return a promise
-		var loadingPromise = options.loadingFunction();
-
-		// For UX continuity, make sure we show loading for at least one second before resetting
-		setTimeout( function() {
-			// Once actual loading is complete, reset pull to refresh
-			loadingPromise.then( _doReset );
-		}, 1000 );
+		$('.loading').click();
 	};
 
 	/**
@@ -210,7 +194,9 @@ var WebPullToRefresh = (function () {
 	};
 
 	return {
-		init: init
+		init: init,
+		doLoading: _doLoading,
+		doReset: _doReset
 	}
 
 })();
